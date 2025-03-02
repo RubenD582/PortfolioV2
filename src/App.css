@@ -1,0 +1,23 @@
+/* Default Light Mode */
+:root {
+  --bg-color: white;
+}
+
+body {
+  font-family: 'Lora', serif;
+}
+
+
+#root {
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: white;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  #root {
+    padding: 0px;
+  }
+}
