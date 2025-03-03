@@ -119,7 +119,7 @@ function HeaderSection({ darkMode, setDarkMode }) {
         </button>
         
         <button
-          className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2EFF]' : 'border-gray-300'} flex items-center space-x-2 px-2 py-2 border border-gray-300 rounded-md hover:bg-white/5 transition-colors`}
+          className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2EFF]' : 'border-gray-300'} flex items-center space-x-2 px-2 py-2 border rounded-md hover:bg-white/5 transition-colors`}
           onClick={handleThemeToggle}
         >
           {darkMode ? 
@@ -255,7 +255,7 @@ function ProjectSection({ darkMode }) {
         {projects.map((project, index) => (
           <div
             key={index}
-            className="group relative rounded-lg flex flex-col cursor-pointer hover:bg-gray-100 transition-colors duration-500 ease-in-out"
+            className="group relative rounded-lg flex flex-col cursor-pointer transition-colors duration-500 ease-in-out"
           >
             <img
               src={project.thumbnail}
