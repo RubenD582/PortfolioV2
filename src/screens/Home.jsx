@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
-import { Copy, Sun, Moon, Mail, Instagram, Github, Linkedin, MessageCircle } from 'lucide-react';
-import { ArrowRight } from 'lucide-react';
+import { Copy, Sun, Moon, Mail, Instagram, Github, Linkedin, MessageCircle, ArrowRight } from 'lucide-react';
 import Screener from '../assets/screener.jpg';
 import ScreenerVideo from '../assets/ScreenerVideo.mp4';
 import Bot from '../assets/TradingBot.jpg';
@@ -14,6 +13,7 @@ import MarioVideo from '../assets/MarioVideo.mp4';
 import Signature from '../assets/Signature.png';
 import GlowFit from '../assets/Glowfit-logo.png';
 import Ayni from '../assets/Ayni-Logo.png';
+import Resume from '../assets/Ruben_Resume.pdf';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -178,6 +178,16 @@ function AboutSection({ darkMode }) {
           My journey in programming began early, and I've dedicated myself to continuously improving my skills through challenging projects and ongoing learning in a fast-paced tech world.
         </p>
       </section>
+
+      <div className="flex justify-center items-right p-4 w-full">
+        <button
+          onClick={() => window.open(Resume, '_blank')}
+          className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} ml-4 mt-8 flex items-center space-x-2 px-4 py-2 border rounded-md ${darkMode ? 'hover:bg-white/5' : 'hover:bg-gray-200'} transition-colors mr-2`}
+        >
+          <span className={`text-xs ${darkMode ? 'text-[#757575]' : 'text-gray-600'}`}>Resume</span>
+          <ArrowRight size={14} className={`${darkMode ? 'text-[#757575]' : 'text-gray-600'}`} />
+        </button>
+      </div>
     </div>
   );
 }
