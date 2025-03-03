@@ -335,7 +335,21 @@ function ProjectSection({ darkMode }) {
               {project.video && (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="bg-black bg-opacity-60 rounded-full h-12 w-12 flex items-center justify-center">
-                    <p className='text-white ml-1'>►</p>
+                    <svg className="ml-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" width="16px" height="16px" viewBox="-3 0 28 28" version="1.1">
+    
+                        <title>play</title>
+                        <desc>Created with Sketch Beta.</desc>
+                        <defs>
+
+                    </defs>
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                            <g id="Icon-Set-Filled" sketch:type="MSLayerGroup" transform="translate(-419.000000, -571.000000)" fill="#FFFFFF">
+                                <path d="M440.415,583.554 L421.418,571.311 C420.291,570.704 419,570.767 419,572.946 L419,597.054 C419,599.046 420.385,599.36 421.418,598.689 L440.415,586.446 C441.197,585.647 441.197,584.353 440.415,583.554" id="play" sketch:type="MSShapeGroup">
+
+                    </path>
+                            </g>
+                        </g>
+                    </svg>
                   </div>
                 </div>
               )}
