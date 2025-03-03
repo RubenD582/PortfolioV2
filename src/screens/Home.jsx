@@ -37,7 +37,7 @@ export default function Home() {
   }, [darkMode]);
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'bg-[#1A1A1A] text-gray-100' : 'bg-white text-gray-800'}`}>
+    <div className={`min-h-screen ${darkMode ? 'bg-[#1A1A1A] text-gray-100' : 'bg-white text-gray-800'} p-4`}>
       <div className='my-5'></div>
       
       <HeaderSection darkMode={darkMode} setDarkMode={setDarkMode} />
@@ -117,8 +117,9 @@ function HeaderSection({ darkMode, setDarkMode }) {
           <Copy size={14} className={`${darkMode ? 'text-[#757575]' : 'text-gray-600'}`}/>
           <span className={`text-xs ${darkMode ? 'text-[#757575]' : 'text-gray-600'}`}>E-mail</span>
         </button>
+        
         <button
-          className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} flex items-center space-x-2 px-2 py-2 border border-gray-300 rounded-md hover:bg-white/5 transition-colors`}
+          className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2EFF]' : 'border-gray-300'} flex items-center space-x-2 px-2 py-2 border border-gray-300 rounded-md hover:bg-white/5 transition-colors`}
           onClick={handleThemeToggle}
         >
           {darkMode ? 
