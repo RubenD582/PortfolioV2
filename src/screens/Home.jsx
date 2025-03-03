@@ -179,7 +179,7 @@ function AboutSection({ darkMode }) {
         </p>
       </section>
 
-      <div className="flex justify-center items-right p-4 w-full">
+      <div className="">
         <button
           onClick={() => window.open(Resume, '_blank')}
           className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} ml-4 mt-8 flex items-center space-x-2 px-4 py-2 border rounded-md ${darkMode ? 'hover:bg-white/5' : 'hover:bg-gray-200'} transition-colors mr-2`}
@@ -385,7 +385,7 @@ function ProjectSection({ darkMode }) {
           onClick={() => setShowVideo(false)}
         >
           <div className="relative">
-            <video className="h-[80vh] rounded-lg" controls autoPlay>
+            <video preload="metadata" className="h-[80vh] rounded-lg" controls autoPlay>
               <source src={videoURL} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
@@ -442,13 +442,21 @@ function EducationSection({ darkMode }) {
 
 function SkillSection({ darkMode }) {
   const skills = [
-    { name: "Java", description: "Backend Development", logo: JavaLogo },
-    { name: "Python", description: "AI & Automation", logo: PythonLogo },
-    { name: "Flutter", description: "Mobile Development", logo: FlutterLogo },
-    { name: "JavaScript", description: "Web Development", logo: JavaScriptLogo },
-    { name: "Node.js", description: "Server-side Development", logo: NodeLogo },
-    { name: "React", description: "Frontend Development", logo: ReactLogo },
+    { name: "Java", description: "Backend Development", logo: JavaLogo, url:"https://www.java.com/en/" },
+    { name: "Python", description: "AI & Automation", logo: PythonLogo, url:"https://www.python.org/" },
+    { name: "Flutter", description: "Mobile Development", logo: FlutterLogo, url:"https://flutter.dev/" },
+    { name: "JavaScript", description: "Web Development", logo: JavaScriptLogo, url:"https://www.javascript.com/" },
+    { name: "Node.js", description: "Server-side Development", logo: NodeLogo, url:"https://nodejs.org/en" },
+    { name: "React", description: "Frontend Development", logo: ReactLogo, url:"https://react.dev/" },
   ];
+
+  function handleOnClick(url) {
+    const a = document.createElement("a");
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.click();
+  }
 
   return (
     <section id="skills" className="w-full text-gray-800 p-4 flex flex-col">
@@ -456,8 +464,10 @@ function SkillSection({ darkMode }) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
         {skills.map((skill, index) => (
-          <div key={index} className={`flex items-center space-x-2 ${darkMode ? 'hover:bg-white/5' : 'hover:bg-gray-100'} rounded-xl cursor-pointer`}>
-            {/* Gray container around the icon */}
+          <div key={index} 
+            className={`flex items-center space-x-2 ${darkMode ? 'hover:bg-white/5' : 'hover:bg-gray-100'} rounded-xl cursor-pointer`}
+            onClick={() => handleOnClick(skill.url)}
+          >
             <div className="bg-transparent rounded-full flex items-center justify-center p-2">
               <img
                 src={skill.logo}
@@ -499,28 +509,50 @@ function FooterSection({ darkMode }) {
         <div className="flex items-center space-x-2">
           <button
             className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} flex items-center space-x-2 px-2 py-2 border rounded-md hover:bg-white/5 transition-colors`}
-            onClick={() => {}}
+            onClick={() => {
+              const a = document.createElement("a");
+              a.href = "mailto:rdreyer523@gmail.com";
+              a.click();
+            }}            
           >
             <Mail size={14} className={`${darkMode ? 'text-[#757575]' : 'text-gray-400'}`} />
           </button>
 
           <button
             className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} flex items-center space-x-2 px-2 py-2 border rounded-md hover:bg-white/5 transition-colors`}
-            onClick={() => {}}
+            onClick={() => {
+              const a = document.createElement("a");
+              a.href = "https://github.com/RubenD582";
+              a.target = "_blank";
+              a.rel = "noopener noreferrer";
+              a.click();
+            }}
           >
             <Github size={14} className={`${darkMode ? 'text-[#757575]' : 'text-gray-400'}`} />
           </button>
 
           <button
             className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} flex items-center space-x-2 px-2 py-2 border rounded-md hover:bg-white/5 transition-colors`}
-            onClick={() => {}}
+            onClick={() => {
+              const a = document.createElement("a");
+              a.href = "https://linkedin.com/in/rubendreyer";
+              a.target = "_blank";
+              a.rel = "noopener noreferrer";
+              a.click();
+            }}
           >
             <Linkedin size={14} className={`${darkMode ? 'text-[#757575]' : 'text-gray-400'}`} />
           </button>
 
           <button
             className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} flex items-center space-x-2 px-2 py-2 border rounded-md hover:bg-white/5 transition-colors`}
-            onClick={() => {}}
+            onClick={() => {
+              const a = document.createElement("a");
+              a.href = "https://wa.me/27729717922";
+              a.target = "_blank";
+              a.rel = "noopener noreferrer";
+              a.click();
+            }}            
           >
             <MessageCircle size={14} className={`${darkMode ? 'text-[#757575]' : 'text-gray-400'}`} />
           </button>
@@ -537,10 +569,10 @@ function FooterSection({ darkMode }) {
 
       {/* Contact Info */}
       <div className="text-right mt-2 mr-4">
-        <p className={`${darkMode ? 'text-[#7D7D7D]' : 'text-gray-600'} text-xs`}>
+        <a href="mailto:rdreyer523@gmail.com" className={`${darkMode ? 'text-[#7D7D7D]' : 'text-blue-600'} text-xs cursor-pointer underline`}>
           rdreyer523@gmail.com
-        </p>
-        <p className={`${darkMode ? 'text-[#7D7D7D]' : 'text-gray-600'} text-xs mt-1`}>
+        </a>
+        <p href="tel:+27729717922" className={`${darkMode ? 'text-[#7D7D7D]' : 'text-blue-600'} text-xs mt-1 underline cursor-pointer`}>
           +27 72 971 7922
         </p>
       </div>
