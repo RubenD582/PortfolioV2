@@ -100,6 +100,19 @@ function HeaderSection({ darkMode, setDarkMode }) {
   const handleThemeToggle = () => {
     setDarkMode(!darkMode);
   };
+  
+  const [toastVisible, setToastVisible] = useState(false);
+
+  function handleCopyEmail() {
+    navigator.clipboard.writeText('rdreyer523@gmail.com')
+      .then(() => {
+        setToastVisible(true);
+        setTimeout(() => {
+          setToastVisible(false);
+        }, 2000); // Toast disappears after 2 seconds
+      })
+      .catch(err => console.error('Failed to copy text: ', err));
+  }
 
   return (
     <section
@@ -116,10 +129,21 @@ function HeaderSection({ darkMode, setDarkMode }) {
 
       {/* Right Section (Buttons) */}
       <div className="flex flex-row">
-        <button className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} flex items-center space-x-2 px-4 py-2 border rounded-md ${darkMode ? 'hover:bg-white/5' : 'hover:bg-gray-200'} transition-colors mr-2`}>
-          <Copy size={14} className={`${darkMode ? 'text-[#757575]' : 'text-gray-600'}`}/>
-          <span className={`text-xs ${darkMode ? 'text-[#757575]' : 'text-gray-600'}`}>E-mail</span>
-        </button>
+        <div className="relative">
+          <button
+            onClick={handleCopyEmail}
+            className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} flex items-center space-x-2 px-4 py-2 border rounded-md ${darkMode ? 'hover:bg-white/5' : 'hover:bg-gray-200'} transition-colors mr-2`}
+          >
+            <Copy size={14} className={`${darkMode ? 'text-[#757575]' : 'text-gray-600'}`} />
+            <span className={`text-xs ${darkMode ? 'text-[#757575]' : 'text-gray-600'}`}>E-mail</span>
+          </button>
+
+          {toastVisible && (
+            <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs py-3 px-4 rounded-full shadow-lg">
+              Email copied to clipboard
+            </div>
+          )}
+        </div>
         
         <button
           className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2EFF]' : 'border-gray-300'} flex items-center space-x-2 px-2 py-2 border rounded-md hover:bg-white/5 transition-colors`}
