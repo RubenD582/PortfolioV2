@@ -3,11 +3,14 @@ import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { Copy, Sun, Moon, Mail, Instagram, Github, Linkedin, MessageCircle } from 'lucide-react';
 import { ArrowRight } from 'lucide-react';
 import Screener from '../assets/screener.jpg';
+import ScreenerVideo from '../assets/ScreenerVideo.mp4';
 import Bot from '../assets/TradingBot.jpg';
 import Chat from '../assets/Chat.jpg';
+import ChatVideo from '../assets/ChatVideo.mp4';
 import Nails from '../assets/Nails.jpg';
 import SafeRoutes from '../assets/SafeRoutes.jpg';
 import SuperMario from '../assets/SuperMario.jpg';
+import MarioVideo from '../assets/MarioVideo.mp4';
 import Signature from '../assets/Signature.png';
 import GlowFit from '../assets/Glowfit-logo.png';
 import Ayni from '../assets/Ayni-Logo.png';
@@ -215,72 +218,135 @@ function ProjectSection({ darkMode }) {
       title: "Screener",
       description: "Cryptocurrency screener",
       thumbnail: Screener,
+      id: "screener",
+      video: true,
     },
     {
       title: "Chat App",
       description: "Interactive chat application",
       thumbnail: Chat,
+      id: "chat",
+      video: true,
     },
     {
       title: "Nails By Dani",
       description: "Website portfolio",
       thumbnail: Nails,
+      id: "dani",
+      video: false,
     },
     {
       title: "Trading Bot",
-      description: "Automated bot that place orders",
+      description: "Automated bot that places orders",
       thumbnail: Bot,
+      id: "bot",
+      video: false,
     },
     {
       title: "Safe Routes",
       description: "Find your way without the worry.",
       thumbnail: SafeRoutes,
+      id: "saferoutes",
+      video: false,
     },
     {
       title: "Artificial Intelligence",
-      description: "A reinforcement learning AI that play Super Mario.",
+      description: "A reinforcement learning AI that plays Super Mario.",
       thumbnail: SuperMario,
-    },    
+      id: "mario",
+      video: true,
+    },
   ];
 
-  return (
-    <section
-      id="projects"
-      className="w-full text-gray-800 p-4 flex flex-col"
-    >
-      <h1 className={`${darkMode ? 'text-white' : ''} font-medium text-[16px] mb-4`}>Projects</h1>
+  const [videoURL, setVideoURL] = useState(null);
+  const [showVideo, setShowVideo] = useState(false);
 
-      {/* Grid container: one column on mobile, two on md+ */}
+  function handleOnClick(id) {
+    if (id === "saferoutes") {
+      const a = document.createElement("a");
+      a.href = "https://github.com/RubenD582/Safe-Routes";
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.click();
+    } else if (id === "chat") {
+      setShowVideo(true);
+      setVideoURL(ChatVideo);
+    } else if (id === "mario") {
+      setShowVideo(true);
+      setVideoURL(MarioVideo);
+    } else if (id === "dani") {
+      const a = document.createElement("a");
+      a.href = "https://nailsbydani.co.za";
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.click();
+    } else if (id === "screener") {
+      setShowVideo(true);
+      setVideoURL(ScreenerVideo);
+    }
+  }
+
+  return (
+    <section id="projects" className="w-full text-gray-800 p-4 flex flex-col">
+      <h1 className={`${darkMode ? "text-white" : ""} font-medium text-[16px] mb-4`}>
+        Projects
+      </h1>
+
+      {/* Grid container */}
       <div className="mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 gap-y-3">
         {projects.map((project, index) => (
           <div
             key={index}
-            className="group relative rounded-lg flex flex-col cursor-pointer transition-colors duration-500 ease-in-out"
+            className={`group relative rounded-lg flex flex-col cursor-pointer transition-colors duration-500 ease-in-out p-2 ${
+              darkMode ? "hover:bg-white/5" : "hover:bg-gray-100"
+            }`}
+            onClick={() => handleOnClick(project.id)}
           >
-            <img
-              src={project.thumbnail}
-              alt={project.title}
-              className="w-full object-contain rounded-lg"
-            />
-
-            {/* Desktop overlay: visible on hover for md+ screens */}
-            <div className="hidden md:flex absolute inset-0 bg-gray-900 rounded-lg bg-opacity-50 flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-              <h2 className="text-base font-medium text-white">{project.title}</h2>
-              <p className="text-xs font-light text-gray-200 text-center">{project.description}</p>
+            <div className="relative">
+              <img
+                src={project.thumbnail}
+                alt={project.title}
+                className="w-full object-contain rounded-lg"
+              />
+              {project.video && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="bg-black bg-opacity-60 rounded-full h-12 w-12 flex items-center justify-center">
+                    <p className='text-white ml-1'>►</p>
+                  </div>
+                </div>
+              )}
             </div>
 
-            {/* Mobile: show text below the image */}
-            <div className="block md:hidden mb-5 mt-2 w-full">
-              <h2 className={`${darkMode ? 'text-[#999999]' : ''} text-base font-medium pl-2`}>{project.title}</h2>
-              <p className={`${darkMode ? 'text-[#535353]' : 'text-gray-600'} text-sm font-light pl-2`}>{project.description}</p>
+            {/* Always visible text on mobile */}
+            <div className="block mb-2 mt-2 w-full">
+              <h2 className={`${darkMode ? "text-[#999999]" : ""} text-base font-medium pl-2`}>
+                {project.title}
+              </h2>
+              <p className={`${darkMode ? "text-[#535353]" : "text-gray-600"} text-sm font-light pl-2`}>
+                {project.description}
+              </p>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Video Modal */}
+      {showVideo && (
+        <div 
+          className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-60 z-[100]"
+          onClick={() => setShowVideo(false)}
+        >
+          <div className="relative">
+            <video className="h-[80vh] rounded-lg" controls autoPlay>
+              <source src={videoURL} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
-
 
 function EducationSection({ darkMode }) {
   return (
