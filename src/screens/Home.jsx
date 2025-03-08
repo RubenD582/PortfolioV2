@@ -33,17 +33,33 @@ export default function Home() {
 
   useEffect(() => {
     if (darkMode) {
-      document.body.classList.add('dark');
+      document.body.classList.add("dark");
+      localStorage.setItem("theme", "dark");
     } else {
-      document.body.classList.remove('dark');
+      document.body.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     }
+
+    // Reinitialize AOS after theme change
+    setTimeout(() => {
+      AOS.refreshHard();
+    }, 100); // Slight delay to ensure AOS detects changes
+
   }, [darkMode]);
 
+  // On initial load, retrieve theme preference
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      setDarkMode(true);
+    }
+  }, []);
+
   return (
-    <div className={`min-h-screen ${darkMode ? 'bg-[#1A1A1A] text-gray-100' : 'bg-white text-gray-800'} p-4`}>
+    <div className={`min-h-screen ${darkMode ? 'text-gray-100' : 'text-gray-800'} bg-transparent p-4`}>
       <div className='my-5'></div>
       
-      <HeaderSection darkMode={darkMode} setDarkMode={setDarkMode} />
+      <HeaderSection darkMode={darkMode} setDarkMode={setDarkMode}/>
 
       <div className='my-10'></div>
       
@@ -132,7 +148,7 @@ function HeaderSection({ darkMode, setDarkMode }) {
         <div className="relative">
           <button
             onClick={handleCopyEmail}
-            className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} flex items-center space-x-2 px-4 py-2 border rounded-md ${darkMode ? 'hover:bg-white/5' : 'hover:bg-gray-200'} transition-colors mr-2`}
+            className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} flex items-center space-x-2 px-4 py-2 border rounded-md ${darkMode ? 'hover:bg-white/5' : 'hover:bg-gray-200'} mr-2`}
           >
             <Copy size={14} className={`${darkMode ? 'text-[#757575]' : 'text-gray-600'}`} />
             <span className={`text-xs ${darkMode ? 'text-[#757575]' : 'text-gray-600'}`}>E-mail</span>
@@ -146,7 +162,7 @@ function HeaderSection({ darkMode, setDarkMode }) {
         </div>
         
         <button
-          className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2EFF]' : 'border-gray-300'} flex items-center space-x-2 px-2 py-2 border rounded-md hover:bg-white/5 transition-colors`}
+          className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2EFF]' : 'border-gray-300'} flex items-center space-x-2 px-2 py-2 border rounded-md hover:bg-white/5`}
           onClick={handleThemeToggle}
         >
           {darkMode ? 
@@ -162,7 +178,7 @@ function HeaderSection({ darkMode, setDarkMode }) {
 
 function AboutSection({ darkMode }) {
   return (
-    <div>
+    <div data-aos="fade-in">
       <section id="available" className='px-4 mb-4'>
         <AvailableForWork />
       </section>
@@ -182,7 +198,7 @@ function AboutSection({ darkMode }) {
       <div className="">
         <button
           onClick={() => window.open(Resume, '_blank')}
-          className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} ml-4 mt-8 flex items-center space-x-2 px-4 py-2 border rounded-md ${darkMode ? 'hover:bg-white/5' : 'hover:bg-gray-200'} transition-colors mr-2`}
+          className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} ml-4 mt-8 flex items-center space-x-2 px-4 py-2 border rounded-md ${darkMode ? 'hover:bg-white/5' : 'hover:bg-gray-200'} mr-2`}
         >
           <span className={`text-xs ${darkMode ? 'text-[#757575]' : 'text-gray-600'}`}>Resume</span>
           <ArrowRight size={14} className={`${darkMode ? 'text-[#757575]' : 'text-gray-600'}`} />
@@ -212,6 +228,7 @@ function ExperienceSection({ darkMode }) {
     <section
       id="experience"
       className="w-full text-gray-800 p-4 flex flex-col"
+      data-aos="zoom-in"
     >
       <h1 className={`${darkMode ? 'text-white' : ''} font-medium text-[16px] mb-4`}>Experience</h1>
       {/* <p className="text-sm text-[#757575] mb-4 font-light">
@@ -335,6 +352,7 @@ function ProjectSection({ darkMode }) {
               darkMode ? "hover:bg-white/5" : "hover:bg-gray-100"
             }`}
             onClick={() => handleOnClick(project.id)}
+            data-aos="zoom-out"
           >
             <div className="relative">
               <img
@@ -404,7 +422,7 @@ function EducationSection({ darkMode }) {
     >
       <h1 className={`${darkMode ? 'text-white' : ''} font-medium text-[16px] mb-4`}>Education</h1>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4" data-aos="zoom-out">
         <div className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} border rounded-lg p-4`}>
           <p className={`${darkMode ? 'text-[#5B5B5B]' : 'text-gray-600 '} text-xs mb-1`}>
             BSc in Information Technology
@@ -419,7 +437,7 @@ function EducationSection({ darkMode }) {
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 mt-4">
+      <div className="flex flex-col gap-4 mt-4" data-aos="zoom-out">
         <div className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} border rounded-lg p-4`}>
           <p className={`${darkMode ? 'text-[#5B5B5B]' : 'text-gray-600'} text-xs mb-1`}>
             Highschool
@@ -467,6 +485,7 @@ function SkillSection({ darkMode }) {
           <div key={index} 
             className={`flex items-center space-x-2 ${darkMode ? 'hover:bg-white/5' : 'hover:bg-gray-100'} rounded-xl cursor-pointer`}
             onClick={() => handleOnClick(skill.url)}
+            data-aos="zoom-out"
           >
             <div className="bg-transparent rounded-full flex items-center justify-center p-2">
               <img
@@ -508,7 +527,7 @@ function FooterSection({ darkMode }) {
         {/* Social Buttons */}
         <div className="flex items-center space-x-2">
           <button
-            className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} flex items-center space-x-2 px-2 py-2 border rounded-md hover:bg-white/5 transition-colors`}
+            className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} flex items-center space-x-2 px-2 py-2 border rounded-md hover:bg-white/5`}
             onClick={() => {
               const a = document.createElement("a");
               a.href = "mailto:rdreyer523@gmail.com";
@@ -519,7 +538,7 @@ function FooterSection({ darkMode }) {
           </button>
 
           <button
-            className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} flex items-center space-x-2 px-2 py-2 border rounded-md hover:bg-white/5 transition-colors`}
+            className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} flex items-center space-x-2 px-2 py-2 border rounded-md hover:bg-white/5`}
             onClick={() => {
               const a = document.createElement("a");
               a.href = "https://github.com/RubenD582";
@@ -532,7 +551,7 @@ function FooterSection({ darkMode }) {
           </button>
 
           <button
-            className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} flex items-center space-x-2 px-2 py-2 border rounded-md hover:bg-white/5 transition-colors`}
+            className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} flex items-center space-x-2 px-2 py-2 border rounded-md hover:bg-white/5`}
             onClick={() => {
               const a = document.createElement("a");
               a.href = "https://linkedin.com/in/rubendreyer";
@@ -545,7 +564,7 @@ function FooterSection({ darkMode }) {
           </button>
 
           <button
-            className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} flex items-center space-x-2 px-2 py-2 border rounded-md hover:bg-white/5 transition-colors`}
+            className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} flex items-center space-x-2 px-2 py-2 border rounded-md hover:bg-white/5`}
             onClick={() => {
               const a = document.createElement("a");
               a.href = "https://wa.me/27729717922";

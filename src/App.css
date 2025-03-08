@@ -4,9 +4,8 @@
 }
 
 body {
-  font-family: 'Lora', serif;
+  /* transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease; */
 }
-
 
 #root {
   margin: 0 auto;
