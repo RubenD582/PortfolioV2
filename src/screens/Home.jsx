@@ -228,7 +228,7 @@ function ExperienceSection({ darkMode }) {
     <section
       id="experience"
       className="w-full text-gray-800 p-4 flex flex-col"
-      data-aos="zoom-in"
+      data-aos="zoom-out"
     >
       <h1 className={`${darkMode ? 'text-white' : ''} font-medium text-[16px] mb-4`}>Experience</h1>
       {/* <p className="text-sm text-[#757575] mb-4 font-light">
