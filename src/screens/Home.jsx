@@ -195,7 +195,7 @@ function AboutSection({ darkMode }) {
 function ExperienceSection({ darkMode }) {
   const experiences = [
     {
-      role: 'Web Developer',
+      role: 'Fullstack Web Developer',
       company: 'Ayni',
       dateRange: '2022 - 2025 Feb',
       logo: Ayni
