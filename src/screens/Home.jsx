@@ -133,7 +133,8 @@ function HeaderSection({ darkMode, setDarkMode }) {
   return (
     <section
       id="header"
-      className={`w-full p-4 flex items-center justify-between top-0 sticky ${darkMode ? 'bg-[#1A1A1A]' : 'bg-white'} z-[99]`}
+      className={`w-full p-4 flex items-center justify-between ${darkMode ? 'bg-[#1A1A1A]' : 'bg-white'} z-[99]`}
+      data-aos="fade-in"
     >
       {/* Left Section */}
       <div className="flex flex-col">
