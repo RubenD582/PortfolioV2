@@ -403,13 +403,33 @@ function ProjectSection({ darkMode }) {
           onClick={() => setShowVideo(false)}
         >
           <div className="relative">
-            <video preload="metadata" className="h-[80vh] rounded-lg" controls autoPlay>
+            <video 
+              preload="metadata" 
+              className="h-[90vh] rounded-lg" 
+              controls 
+              autoPlay
+              onClick={(e) => e.stopPropagation()}
+              onLoadedMetadata={(e) => {
+                const videoElement = e.target;
+                if (videoElement.requestFullscreen) {
+                  videoElement.requestFullscreen();
+                } else if (videoElement.mozRequestFullScreen) { // Firefox
+                  videoElement.mozRequestFullScreen();
+                } else if (videoElement.webkitRequestFullscreen) { // Chrome, Safari, Edge
+                  videoElement.webkitRequestFullscreen();
+                } else if (videoElement.msRequestFullscreen) { // IE/Edge
+                  videoElement.msRequestFullscreen();
+                }
+              }}
+            >
               <source src={videoURL} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
         </div>
       )}
+
+
     </section>
   );
 }
