@@ -406,7 +406,7 @@ function ProjectSection({ darkMode }) {
           <div className="relative">
             <video 
               preload="metadata" 
-              className="h-[90vh] rounded-lg" 
+              className="w-full md:h-[90vh] md:w-auto rounded-lg" 
               controls 
               autoPlay
               onClick={(e) => e.stopPropagation()}
