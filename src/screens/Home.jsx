@@ -185,7 +185,7 @@ function AboutSection({ darkMode }) {
 
         </h1>
         <p className={`mt-10 text-sm ${darkMode ? 'text-white/50' : 'text-[#757575]'} pt-2 font-light`}>
-          I'm <span className="font-medium text-white/70">Ruben Dreyer</span>, a passionate programmer based in Gauteng, South Africa. I earned my BSc in Information Technology from North West University, where I built a solid foundation in coding and problem-solving.
+          I'm <span className={`font-medium ${darkMode ? 'text-black/70' : 'text-white/70'}`}>Ruben Dreyer</span>, a passionate programmer based in Gauteng, South Africa. I earned my BSc in Information Technology from North West University, where I built a solid foundation in coding and problem-solving.
           <br /><br />
           My journey in programming began early, and I've dedicated myself to continuously improving my skills through challenging projects and ongoing learning in a fast-paced tech world.
         </p>
