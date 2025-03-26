@@ -1,28 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
-import { Copy, Sun, Moon, Mail, Instagram, Github, Linkedin, MessageCircle, ArrowRight } from 'lucide-react';
-import Screener from '../assets/screener.jpg';
-import ScreenerVideo from '../assets/ScreenerVideo.mp4';
-import Bot from '../assets/TradingBot.jpg';
-import Chat from '../assets/Chat.jpg';
-import ChatVideo from '../assets/ChatVideo.mp4';
-import Nails from '../assets/Nails.jpg';
-import SafeRoutes from '../assets/SafeRoutes.jpg';
-import SuperMario from '../assets/SuperMario.jpg';
-import MarioVideo from '../assets/MarioVideo.mp4';
-import Signature from '../assets/Signature.png';
-import GlowFit from '../assets/Glowfit-logo.png';
-import Ayni from '../assets/Ayni-Logo.png';
-import Resume from '../assets/Ruben_Resume.pdf';
+import { Copy, Sun, Moon, Mail, Instagram, Github, Linkedin, MessageCircle, ArrowRight, Play, FileText} from 'lucide-react';
+
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Hls from 'hls.js';
 
-import JavaLogo from '../assets/Stack/Java.png';
-import PythonLogo from '../assets/Stack/Python.png';
-import FlutterLogo from '../assets/Stack/Flutter.png';
-import JavaScriptLogo from '../assets/Stack/JS.png';
-import NodeLogo from '../assets/Stack/NodeJS.png';
-import ReactLogo from '../assets/Stack/React.png';
+const PUBLIC_URL = "https://rubendreyer.co.za";
+
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
@@ -58,14 +43,14 @@ export default function Home() {
   return (
     <div className={`min-h-screen ${darkMode ? 'text-gray-100' : 'text-gray-800'} bg-transparent p-4`}>
       <div className='my-5'></div>
-      
+
       <HeaderSection darkMode={darkMode} setDarkMode={setDarkMode}/>
 
-      <div className='my-10'></div>
+      <div className='my-20'></div>
       
       <AboutSection darkMode={darkMode}/>  
       
-      <div className='my-10'></div>
+      <div className='my-14'></div>
       
       <ExperienceSection darkMode={darkMode}/>
 
@@ -85,7 +70,7 @@ export default function Home() {
 
       <SummarySection darkMode={darkMode}/>
 
-      <div className='my-10'></div>
+      <div className='my-5'></div>
 
       <FooterSection darkMode={darkMode}/>
 
@@ -96,7 +81,7 @@ export default function Home() {
 
 function AvailableForWork() {
   return (
-    <div className="inline-flex items-center justify-start space-x-2 bg-green-500/10 p-1 rounded-full whitespace-nowrap">
+    <div className="inline-flex items-center justify-start space-x-2 bg-green-500/10 p-1 rounded-full whitespace-nowrap mb-2">
       {/* Container for the green dot and ping animation */}
       <div className="relative h-2 w-2 ml-2">
         {/* Ping animation */}
@@ -138,14 +123,19 @@ function HeaderSection({ darkMode, setDarkMode }) {
     >
       {/* Left Section */}
       <div className="flex flex-col">
-        <h1 className="text-sm font-Inter font-medium mb-1">Ruben Dreyer</h1>
-        <span className={`${darkMode ? 'text-[#6B6B6B]' : 'text-gray-500'} text-xs font-Inter font-light`}>
-          Software developer
-        </span>
+
       </div>
 
       {/* Right Section (Buttons) */}
       <div className="flex flex-row">
+       <button
+          onClick={() => window.open(PUBLIC_URL + '/assets/Ruben_Resume.pdf', '_blank')}
+          className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} flex items-center space-x-2 px-4 py-2 border rounded-md ${darkMode ? 'hover:bg-white/5' : 'hover:bg-gray-200'} mr-2`}
+       >
+        <FileText size={14} className={`${darkMode ? 'text-[#757575]' : 'text-gray-600'}`} />
+         <span className={`text-xs ${darkMode ? 'text-[#757575]' : 'text-gray-600'}`}>Resume</span>
+       </button>
+
         <div className="relative">
           <button
             onClick={handleCopyEmail}
@@ -180,31 +170,26 @@ function HeaderSection({ darkMode, setDarkMode }) {
 function AboutSection({ darkMode }) {
   return (
     <div data-aos="fade-in">
-      <section id="available" className='px-4 mb-4'>
+      <section id="available" className='px-4 mb-2'>
         <AvailableForWork />
       </section>
 
       <section id="about" className="w-full text-gray-800 px-4 flex flex-col">
-        <h1 className={`font-semibold text-[28px] ${darkMode ? 'text-[#E3E3E3]' : 'text-black'}`}>
-          I code innovative solutions and am ready for a{" "}
-          <span className={`${darkMode ? 'text-[#6B6B6B]' : 'text-gray-600'}`}>full-time challenge.</span>
+        <h1 className={`font-semibold text-[52px] leading-[64px] ${darkMode ? 'text-[#E3E3E3]' : 'text-black'}`}>
+          Software developer. {" "}
+{/*           <span */}
+{/*             className={`${darkMode ? 'text-[#6B6B6B]' : 'text-gray-600'} bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text`} */}
+{/*           > */}
+{/*             developer */}
+{/*           </span> */}
+
         </h1>
-        <p className="mt-4 text-sm text-[#757575] pt-5 font-light">
-          I'm Ruben Dreyer, a passionate programmer based in Gauteng, South Africa. I earned my BSc in Information Technology from North West University, where I built a solid foundation in coding and problem-solving.
+        <p className={`mt-10 text-sm ${darkMode ? 'text-white/50' : 'text-[#757575]'} pt-2 font-light`}>
+          I'm <span className="font-medium text-white/70">Ruben Dreyer</span>, a passionate programmer based in Gauteng, South Africa. I earned my BSc in Information Technology from North West University, where I built a solid foundation in coding and problem-solving.
           <br /><br />
           My journey in programming began early, and I've dedicated myself to continuously improving my skills through challenging projects and ongoing learning in a fast-paced tech world.
         </p>
       </section>
-
-      <div className="">
-        <button
-          onClick={() => window.open(Resume, '_blank')}
-          className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} ml-4 mt-8 flex items-center space-x-2 px-4 py-2 border rounded-md ${darkMode ? 'hover:bg-white/5' : 'hover:bg-gray-200'} mr-2`}
-        >
-          <span className={`text-xs ${darkMode ? 'text-[#757575]' : 'text-gray-600'}`}>Resume</span>
-          <ArrowRight size={14} className={`${darkMode ? 'text-[#757575]' : 'text-gray-600'}`} />
-        </button>
-      </div>
     </div>
   );
 }
@@ -215,13 +200,13 @@ function ExperienceSection({ darkMode }) {
       role: 'Fullstack Web Developer',
       company: 'Ayni',
       dateRange: '2022 - 2025 Feb',
-      logo: Ayni
+      logo: PUBLIC_URL + '/assets/Ayni-Logo.png'
     },
     {
       role: 'Wordpress Developer',
       company: "Glow Fit",
       dateRange: '13 Nov 2024 - 3 Jan 2025',
-      logo: GlowFit
+      logo: PUBLIC_URL + '/assets/Glowfit-logo.png'
     },
   ];
 
@@ -269,81 +254,160 @@ function ProjectSection({ darkMode }) {
     {
       title: "Screener",
       description: "Cryptocurrency screener",
-      thumbnail: Screener,
+      thumbnail: PUBLIC_URL + '/assets/Screener.png',
       id: "screener",
       video: true,
+      streamURL: PUBLIC_URL + '/assets/ScreenerVideo/ScreenerVideo.m3u8',
+      fallbackVideo: PUBLIC_URL +'/assets/ScreenerVideo/ScreenerVideo.mp4'
     },
     {
       title: "Chat App",
       description: "Interactive chat application",
-      thumbnail: Chat,
+      thumbnail: PUBLIC_URL + '/assets/Chat.jpg',
       id: "chat",
       video: true,
+      streamURL: PUBLIC_URL + '/assets/ChatVideo/ChatVideo.m3u8',
+      fallbackVideo: PUBLIC_URL + '/assets/ChatVideo/ChatVideo.mp4'
     },
     {
       title: "Nails By Dani",
       description: "Website portfolio",
-      thumbnail: Nails,
+      thumbnail: PUBLIC_URL + '/assets/Nails.jpg',
       id: "dani",
       video: false,
     },
     {
       title: "Trading Bot",
       description: "Automated bot that places orders",
-      thumbnail: Bot,
+      thumbnail: PUBLIC_URL + '/assets/TradingBot.jpg',
       id: "bot",
       video: false,
     },
     {
       title: "Safe Routes",
       description: "Find your way without the worry.",
-      thumbnail: SafeRoutes,
+      thumbnail: PUBLIC_URL + '/assets/SafeRoutes.jpg',
       id: "saferoutes",
+      video: false,
+    },
+    {
+      title: "Netflix",
+      description: "Netflix clone using TMDB",
+      thumbnail: PUBLIC_URL + '/assets/Netflix.png',
+      id: "netflix",
       video: false,
     },
     {
       title: "Artificial Intelligence",
       description: "A reinforcement learning AI that plays Super Mario.",
-      thumbnail: SuperMario,
+      thumbnail: PUBLIC_URL + '/assets/SuperMario.jpg',
       id: "mario",
       video: true,
+      streamURL: PUBLIC_URL + '/assets/MarioVideo/MarioVideo.m3u8',
+      fallbackVideo: PUBLIC_URL + '/assets/MarioVideo/MarioVideo.mp4'
     },
   ];
 
   const [videoURL, setVideoURL] = useState(null);
+  const [videoStreamURL, setVideoStreamURL] = useState(null);
   const [showVideo, setShowVideo] = useState(false);
+  const videoRef = useRef(null);
 
   function handleOnClick(id) {
+    const project = projects.find(p => p.id === id);
+
     if (id === "saferoutes") {
       const a = document.createElement("a");
       a.href = "https://github.com/RubenD582/Safe-Routes";
       a.target = "_blank";
       a.rel = "noopener noreferrer";
       a.click();
-    } else if (id === "chat") {
+    } else if (project && project.video) {
       setShowVideo(true);
-      setVideoURL(ChatVideo);
-    } else if (id === "mario") {
-      setShowVideo(true);
-      setVideoURL(MarioVideo);
+      setVideoURL(project.video ? project.fallbackVideo : null);
+      setVideoStreamURL(project.streamURL);
     } else if (id === "dani") {
       const a = document.createElement("a");
       a.href = "https://nailsbydani.co.za";
       a.target = "_blank";
       a.rel = "noopener noreferrer";
       a.click();
-    } else if (id === "screener") {
-      setShowVideo(true);
-      setVideoURL(ScreenerVideo);
+    } else if (id === "netflix") {
+      const a = document.createElement("a");
+      a.href = "https://github.com/RubenD582/Netflix";
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.click();
     }
   }
 
+  // Custom video component with HLS streaming support
+  const StreamableVideo = ({ src, streamSrc, ...props }) => {
+    const videoRef = useRef(null);
+
+    useEffect(() => {
+      console.log("Stream Source: ", streamSrc);
+      const videoElement = videoRef.current;
+
+      // Clean up any existing HLS instance
+      let hls;
+
+      if (streamSrc && Hls.isSupported()) {
+        console.log("HLS.js supported, loading stream");
+        hls = new Hls({
+          maxBufferLength: 30,
+          maxMaxBufferLength: 60,
+          enableWorker: true,
+        });
+
+        hls.loadSource(streamSrc);
+        hls.attachMedia(videoElement);
+
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          videoElement.play();
+        });
+
+        hls.on(Hls.Events.FRAG_LOADING, () => {});
+
+        hls.on(Hls.Events.ERROR, (event, data) => {
+          console.error("HLS.js error:", data);
+        });
+
+      } else if (streamSrc && videoElement.canPlayType('application/vnd.apple.mpegurl')) {
+        console.log("Using native HLS support");
+        // For Safari and native HLS support
+        videoElement.src = streamSrc;
+        videoElement.addEventListener('loadedmetadata', () => {
+          console.log("STREAMING");
+          videoElement.play();
+        });
+      }
+
+      // Fallback to regular video source if no stream available
+      if (!streamSrc) {
+        videoElement.src = src;
+      }
+
+      return () => {
+        if (hls) {
+          hls.destroy();
+        }
+      };
+    }, [src, streamSrc]);
+
+    return (
+      <video
+        ref={videoRef}
+        {...props}
+      >
+        {src && <source src={src} type="video/mp4" />}
+        Your browser does not support the video tag.
+      </video>
+    );
+  };
+
   return (
     <section id="projects" className="w-full text-gray-800 p-4 flex flex-col">
-      <h1 className={`${darkMode ? "text-white" : ""} font-medium text-[16px] mb-4`}>
-        Projects
-      </h1>
-
       {/* Grid container */}
       <div className="mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 gap-y-3">
         {projects.map((project, index) => (
@@ -364,21 +428,7 @@ function ProjectSection({ darkMode }) {
               {project.video && (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="bg-black bg-opacity-60 rounded-full h-12 w-12 flex items-center justify-center">
-                    <svg className="ml-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" width="16px" height="16px" viewBox="-3 0 28 28" version="1.1">
-    
-                        <title>play</title>
-                        <desc>Created with Sketch Beta.</desc>
-                        <defs>
-
-                    </defs>
-                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-                            <g id="Icon-Set-Filled" sketch:type="MSLayerGroup" transform="translate(-419.000000, -571.000000)" fill="#FFFFFF">
-                                <path d="M440.415,583.554 L421.418,571.311 C420.291,570.704 419,570.767 419,572.946 L419,597.054 C419,599.046 420.385,599.36 421.418,598.689 L440.415,586.446 C441.197,585.647 441.197,584.353 440.415,583.554" id="play" sketch:type="MSShapeGroup">
-
-                    </path>
-                            </g>
-                        </g>
-                    </svg>
+                    <Play color="white" fill="white" className="ml-1 opacity-80"/>
                   </div>
                 </div>
               )}
@@ -397,17 +447,19 @@ function ProjectSection({ darkMode }) {
         ))}
       </div>
 
-      {/* Video Modal */}
+      {/* Video Modal with Streaming Support */}
       {showVideo && (
-        <div 
+        <div
           className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-60 z-[100]"
           onClick={() => setShowVideo(false)}
         >
           <div className="relative">
-            <video 
-              preload="metadata" 
-              className="w-full md:h-[90vh] md:w-auto rounded-lg" 
-              controls 
+            <StreamableVideo
+              src={videoURL}
+              streamSrc={videoStreamURL}
+              preload="none"
+              className="w-full md:h-[90vh] md:w-auto rounded-lg"
+              controls
               autoPlay
               onClick={(e) => e.stopPropagation()}
               onLoadedMetadata={(e) => {
@@ -422,15 +474,10 @@ function ProjectSection({ darkMode }) {
                   videoElement.msRequestFullscreen();
                 }
               }}
-            >
-              <source src={videoURL} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            />
           </div>
         </div>
       )}
-
-
     </section>
   );
 }
@@ -481,12 +528,12 @@ function EducationSection({ darkMode }) {
 
 function SkillSection({ darkMode }) {
   const skills = [
-    { name: "Java", description: "Backend Development", logo: JavaLogo, url:"https://www.java.com/en/" },
-    { name: "Python", description: "AI & Automation", logo: PythonLogo, url:"https://www.python.org/" },
-    { name: "Flutter", description: "Mobile Development", logo: FlutterLogo, url:"https://flutter.dev/" },
-    { name: "JavaScript", description: "Web Development", logo: JavaScriptLogo, url:"https://www.javascript.com/" },
-    { name: "Node.js", description: "Server-side Development", logo: NodeLogo, url:"https://nodejs.org/en" },
-    { name: "React", description: "Frontend Development", logo: ReactLogo, url:"https://react.dev/" },
+    { name: "Java", description: "Backend Development", logo: PUBLIC_URL + '/assets/Stack/Java.png', url:"https://www.java.com/en/" },
+    { name: "Python", description: "AI & Automation", logo:  PUBLIC_URL + '/assets/Stack/Python.png', url:"https://www.python.org/" },
+    { name: "Flutter", description: "Mobile Development", logo:  PUBLIC_URL + '/assets/Stack/Flutter.png', url:"https://flutter.dev/" },
+    { name: "JavaScript", description: "Web Development", logo:  PUBLIC_URL + '/assets/Stack/JS.png', url:"https://www.javascript.com/" },
+    { name: "Node.js", description: "Server-side Development", logo:  PUBLIC_URL + '/assets/Stack/NodeJS.png', url:"https://nodejs.org/en" },
+    { name: "React", description: "Frontend Development", logo:  PUBLIC_URL + '/assets/Stack/React.png', url:"https://react.dev/" },
   ];
 
   function handleOnClick(url) {
@@ -536,6 +583,12 @@ function SummarySection({ darkMode }) {
           I am driven by a deep passion for programming, I create digital solutions that merge functionality with an excellent user experience. Based in Gauteng, with a BSc in IT from North West University, I thrive on tackling complex challenges and constantly refining my skills. I’m ready to bring my technical expertise and collaborative spirit to a full-time opportunity.
         </p>
       </div>
+
+      <div className="mt-10">
+        <p className={`${darkMode ? 'text-[#757575]' : ''} text-sm font-light`}>
+         Made with ❤️ in React
+        </p>
+    </div>
     </section>
   );
 }
@@ -600,7 +653,7 @@ function FooterSection({ darkMode }) {
 
         <div>
           <img
-            src={Signature}
+            src={PUBLIC_URL + '/assets/Signature.png'}
             alt="Signature"
             className="h-10 object-contain"
           />
