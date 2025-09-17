@@ -46,7 +46,7 @@ export default function Home() {
 
       <HeaderSection darkMode={darkMode} setDarkMode={setDarkMode}/>
 
-      <div className='my-0'></div>
+      <div className='my-8'></div>
       
       <AboutSection darkMode={darkMode}/>  
       
