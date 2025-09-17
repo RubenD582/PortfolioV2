@@ -183,7 +183,7 @@ function AboutSection({ darkMode = false }) {
         <section id="about" className="space-y-12">
           {/* Main heading */}
           <div className="relative">
-          <h1 className={`font-light text-3xl sm:text-4xl md:text-6xl leading-[0.9] tracking-tight mb-6 ${
+          <h1 className={`font-light text-4xl sm:text-4xl md:text-6xl leading-[0.9] tracking-tight mb-6 ${
             darkMode ? 'text-white' : 'text-gray-900'
           }`}>
             Fullstack Software
