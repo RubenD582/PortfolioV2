@@ -183,15 +183,14 @@ function AboutSection({ darkMode = false }) {
         <section id="about" className="space-y-12">
           {/* Main heading */}
           <div className="relative">
-          <h1 className={`font-light text-4xl sm:text-4xl md:text-6xl leading-[0.9] tracking-tight mb-6 ${
-            darkMode ? 'text-white' : 'text-gray-900'
-          }`}>
-            Fullstack Software
-            <br />
-            <span className={`font-extralight italic mt-2 block ${darkMode ? 'text-white/60' : 'text-gray-500'}`}>
-              Developer
-            </span>
-          </h1>
+            <h1 className={`font-light text-4xl sm:text-4xl md:text-6xl leading-[0.9] tracking-tight mb-6 flex flex-col gap-3 sm:gap-4 md:gap-1 ${
+              darkMode ? 'text-white' : 'text-gray-900'
+            }`}>
+              <span>Fullstack Software</span>
+              <span className={`font-extralight italic ${darkMode ? 'text-white/60' : 'text-gray-500'}`}>
+                Developer
+              </span>
+            </h1>
             
             {/* Subtitle */}
             <p className={`text-sm sm:text-lg font-light tracking-wide ${
@@ -227,7 +226,7 @@ function AboutSection({ darkMode = false }) {
         {/* Scroll down indicator */}
         <div className="pt-16 flex flex-col items-center space-y-3">
           <div className={`w-16 h-px ${darkMode ? 'bg-white/30' : 'bg-gray-400'}`}></div>
-          <span className={`text-xs font-mono tracking-widest uppercase ${
+          <span className={`text-[10px] sm:text-xs font-mono tracking-widest uppercase ${
             darkMode ? 'text-white/40' : 'text-gray-400'
           }`}>
             Scroll Down
