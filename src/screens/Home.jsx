@@ -270,39 +270,39 @@ function ExperienceSection({ darkMode }) {
     <section
       id="experience"
       className="w-full text-gray-800 p-4 flex flex-col"
-      data-aos="zoom-out"
     >
-      <h1 className={`${darkMode ? 'text-white' : ''} font-medium text-[16px] mb-4`}>Experience</h1>
-      {/* <p className="text-sm text-[#757575] mb-4 font-light">
-        My personal projects and the ones I’ve contributed to.
-      </p> */}
-  
+      <h1 
+        className={`${darkMode ? 'text-white' : ''} font-medium text-[16px] mb-4`}
+        data-aos="fade-up"
+      >
+        Experience
+      </h1>
+      
       <div className="flex flex-col md:flex-row gap-4 flex-wrap">
         {experiences.map((exp, index) => (
           <div
             key={index}
             className={`${darkMode ? 'border-[#2E2E2E]' : 'border-gray-200'} border rounded-md p-4 flex flex-col md:w-[48%]`}
+            data-aos="fade-up"
+            data-aos-delay={index * 150}
+            data-aos-duration="600"
           >
             <div className="flex space-x-3">
               <img
                 src={exp.logo}
                 className={`h-10 w-10 object-contain ${darkMode ? 'border-[#6B6B6B]' : 'border-gray-200'} rounded-full`}
               />
-  
               <div>
                 <h2 className={`${darkMode ? 'text-white/75' : ''} font-medium text-sm`}>{exp.role}</h2>
                 <p className={`${darkMode ? 'text-[#6B6B6B]' : 'text-gray-500'} text-xs font-normal mt-[1px]`}>{exp.company}</p>
-                
                 <p className={`${darkMode ? 'text-[#6B6B6B]' : 'text-gray-500'} text-xs mt-2 font-thin`}>{exp.dateRange}</p>
               </div>
             </div>
-  
           </div>
         ))}
       </div>
     </section>
   );
-  
 }
 
 function ProjectSection({ darkMode }) {
