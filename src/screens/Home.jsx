@@ -222,7 +222,7 @@ function AboutSection({ darkMode = false }) {
         </section>
 
         {/* Scroll down indicator */}
-        <div className="pt-16 flex flex-col items-center space-y-3">
+        <div className="pt-16 hidden sm:flex flex-col items-center space-y-3 mt-14">
           <div className={`w-16 h-px ${darkMode ? 'bg-white/30' : 'bg-gray-400'}`}></div>
           <span className={`text-[10px] sm:text-xs font-mono tracking-widest uppercase ${
             darkMode ? 'text-white/40' : 'text-gray-400'
