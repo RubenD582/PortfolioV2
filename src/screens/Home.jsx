@@ -42,11 +42,11 @@ export default function Home() {
 
   return (
     <div className={`min-h-screen ${darkMode ? 'text-gray-100' : 'text-gray-800'} bg-transparent p-4`}>
-      <div className='my-5'></div>
+      {/* <div className='my-5'></div> */}
 
       <HeaderSection darkMode={darkMode} setDarkMode={setDarkMode}/>
 
-      <div className='my-4'></div>
+      <div className='my-0'></div>
       
       <AboutSection darkMode={darkMode}/>  
       
@@ -169,7 +169,7 @@ function HeaderSection({ darkMode, setDarkMode }) {
 
 function AboutSection({ darkMode = false }) {
   return (
-    <div data-aos="fade-in" className={`relative py-16 ${darkMode ? '' : 'bg-white'}`}>
+    <div data-aos="fade-in" className={`relative py-10 sm:py-16 ${darkMode ? '' : 'bg-white'}`}>
 
 
       {/* Content container */}
@@ -186,7 +186,7 @@ function AboutSection({ darkMode = false }) {
             <h1 className={`font-light text-3xl sm:text-4xl md:text-6xl leading-[0.9] tracking-tight mb-6 ${
               darkMode ? 'text-white' : 'text-gray-900'
             }`}>
-              Software
+              Fullstack Software
               <br />
               <span className={`font-extralight italic ${darkMode ? 'text-white/60' : 'text-gray-500'}`}>
                 Developer
@@ -194,7 +194,7 @@ function AboutSection({ darkMode = false }) {
             </h1>
             
             {/* Subtitle */}
-            <p className={`text-lg font-light tracking-wide ${
+            <p className={`text-sm sm:text-lg font-light tracking-wide ${
               darkMode ? 'text-white/70' : 'text-gray-600'
             }`}>
               Crafting digital experiences through code
