@@ -11,12 +11,12 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Roboto', 'sans-serif'], // Default body font
-        poppins: ['Poppins', 'sans-serif'], // Use for headings
-        BodoniModa: ['Bodoni Moda', 'sans-serif'], // Use for headings
-        dancingScript: ['Dancing Script', 'cursive'],
-        Inter: ['Inter', 'sans-serif']
-      },
+        sans: ['Roboto', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif'],
+        bodonimoda: ['Bodoni Moda', 'serif'],
+        dancingscript: ['Dancing Script', 'cursive'],
+        inter: ['Inter', 'sans-serif']
+      }
     },
   },
   plugins: [],

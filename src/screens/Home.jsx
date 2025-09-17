@@ -10,7 +10,7 @@ const PUBLIC_URL = "https://rubendreyer.co.za";
 
 
 export default function Home() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
@@ -46,7 +46,7 @@ export default function Home() {
 
       <HeaderSection darkMode={darkMode} setDarkMode={setDarkMode}/>
 
-      <div className='my-20'></div>
+      <div className='my-4'></div>
       
       <AboutSection darkMode={darkMode}/>  
       
@@ -167,29 +167,74 @@ function HeaderSection({ darkMode, setDarkMode }) {
   );
 }
 
-function AboutSection({ darkMode }) {
+function AboutSection({ darkMode = false }) {
   return (
-    <div data-aos="fade-in">
-      <section id="available" className='px-4 mb-2'>
-        <AvailableForWork />
-      </section>
+    <div data-aos="fade-in" className={`relative py-16 ${darkMode ? '' : 'bg-white'}`}>
 
-      <section id="about" className="w-full text-gray-800 px-4 flex flex-col">
-        <h1 className={`font-semibold text-[52px] leading-[64px] ${darkMode ? 'text-[#E3E3E3]' : 'text-black'}`}>
-          Software developer. {" "}
-{/*           <span */}
-{/*             className={`${darkMode ? 'text-[#6B6B6B]' : 'text-gray-600'} bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text`} */}
-{/*           > */}
-{/*             developer */}
-{/*           </span> */}
 
-        </h1>
-        <p className={`mt-10 text-sm ${darkMode ? 'text-white/50' : 'text-[#757575]'} pt-2 font-light`}>
-          I'm <span className={`font-medium ${darkMode ? 'text-white/70' : 'text-black/70'}`}>Ruben Dreyer</span>, a passionate programmer based in Gauteng, South Africa. I earned my BSc in Information Technology from North West University, where I built a solid foundation in coding and problem-solving.
-          <br /><br />
-          My journey in programming began early, and I've dedicated myself to continuously improving my skills through challenging projects and ongoing learning in a fast-paced tech world.
-        </p>
-      </section>
+      {/* Content container */}
+      <div className="relative z-10 px-8">
+        {/* Available for work badge */}
+        {/* <section id="available" className="mb-4">
+          <AvailableForWork />
+        </section> */}
+
+        {/* Main hero section */}
+        <section id="about" className="space-y-12">
+          {/* Main heading */}
+          <div className="relative">
+            <h1 className={`font-light text-5xl md:text-6xl leading-[0.9] tracking-tight mb-6 ${
+              darkMode ? 'text-white' : 'text-gray-900'
+            }`}>
+              Fullstack Software
+              <br />
+              <span className={`font-extralight italic ${darkMode ? 'text-white/60' : 'text-gray-500'}`}>
+                Developer
+              </span>
+            </h1>
+            
+            {/* Subtitle */}
+            <p className={`text-lg font-light tracking-wide ${
+              darkMode ? 'text-white/70' : 'text-gray-600'
+            }`}>
+              Crafting digital experiences through code
+            </p>
+          </div>
+
+          {/* Bio section */}
+          <div className="space-y-6">
+            <div className={`text-xs font-mono tracking-wider uppercase ${
+              darkMode ? 'text-white/40' : 'text-gray-400'
+            }`}>
+              About
+            </div>
+            
+            <div className={`space-y-6 leading-relaxed font-light ${
+              darkMode ? 'text-white/60' : 'text-gray-600'
+            }`}>
+              <p>
+                I'm Ruben Dreyer, a passionate programmer based in Gauteng, South Africa. I earned my BSc in Information Technology from North West University, where I built a solid foundation in coding and problem-solving.
+              </p>
+              
+              <p>
+                My journey in programming began early, and I've dedicated myself to continuously improving my skills through challenging projects and ongoing learning in a fast-paced tech world.
+              </p>
+            </div>
+          </div>
+
+        </section>
+
+        {/* Scroll down indicator */}
+        <div className="pt-16 flex flex-col items-center space-y-3">
+          <div className={`w-16 h-px ${darkMode ? 'bg-white/30' : 'bg-gray-400'}`}></div>
+          <span className={`text-xs font-mono tracking-widest uppercase ${
+            darkMode ? 'text-white/40' : 'text-gray-400'
+          }`}>
+            Scroll Down
+          </span>
+          <div className={`w-px h-6 ${darkMode ? 'bg-gradient-to-b from-white/30 to-transparent' : 'bg-gradient-to-b from-gray-400 to-transparent'}`}></div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -208,6 +253,18 @@ function ExperienceSection({ darkMode }) {
       dateRange: '13 Nov 2024 - 3 Jan 2025',
       logo: PUBLIC_URL + '/assets/Glowfit-logo.png'
     },
+    {
+      role: 'Fullstack C# Developer',
+      company: "BCMTrac",
+      dateRange: '7 April 2025',
+      logo: PUBLIC_URL + '/assets/bcmtrac.png'
+    },
+    {
+      role: 'Software Developer',
+      company: "ArcelorMittal",
+      dateRange: '1 September 2025 - Current',
+      logo: PUBLIC_URL + '/assets/arcelormittal.png'
+    }
   ];
 
   return (
@@ -534,6 +591,7 @@ function SkillSection({ darkMode }) {
     { name: "JavaScript", description: "Web Development", logo:  PUBLIC_URL + '/assets/Stack/JS.png', url:"https://www.javascript.com/" },
     { name: "Node.js", description: "Server-side Development", logo:  PUBLIC_URL + '/assets/Stack/NodeJS.png', url:"https://nodejs.org/en" },
     { name: "React", description: "Frontend Development", logo:  PUBLIC_URL + '/assets/Stack/React.png', url:"https://react.dev/" },
+    { name: "C#", description: "Full-stack .NET", logo:  PUBLIC_URL + '/assets/Stack/C#.png', url:"https://dotnet.microsoft.com/en-us/languages/csharp" },
   ];
 
   function handleOnClick(url) {
