@@ -118,24 +118,23 @@ function HeaderSection({ darkMode, setDarkMode }) {
   return (
     <section
       id="header"
-      className={`w-full p-4 flex items-center justify-between ${darkMode ? 'bg-[#1A1A1A]' : 'bg-white'} z-[99]`}
+      className={`w-full p-4 flex items-center justify-center sm:justify-between ${darkMode ? 'bg-[#1A1A1A]' : 'bg-white'} z-[99]`}
       data-aos="fade-in"
     >
       {/* Left Section */}
-      <div className="flex flex-col">
-
+      <div className="hidden sm:flex flex-col">
       </div>
-
+      
       {/* Right Section (Buttons) */}
       <div className="flex flex-row">
-       <button
+        <button
           onClick={() => window.open(PUBLIC_URL + '/assets/Ruben_Resume.pdf', '_blank')}
           className={`${darkMode ? 'bg-[#1C1C1C] border-[#2E2E2E]' : 'border-gray-300'} flex items-center space-x-2 px-4 py-2 border rounded-md ${darkMode ? 'hover:bg-white/5' : 'hover:bg-gray-200'} mr-2`}
-       >
-        <FileText size={14} className={`${darkMode ? 'text-[#757575]' : 'text-gray-600'}`} />
-         <span className={`text-xs ${darkMode ? 'text-[#757575]' : 'text-gray-600'}`}>Resume</span>
-       </button>
-
+        >
+          <FileText size={14} className={`${darkMode ? 'text-[#757575]' : 'text-gray-600'}`} />
+          <span className={`text-xs ${darkMode ? 'text-[#757575]' : 'text-gray-600'}`}>Resume</span>
+        </button>
+        
         <div className="relative">
           <button
             onClick={handleCopyEmail}
@@ -144,7 +143,6 @@ function HeaderSection({ darkMode, setDarkMode }) {
             <Copy size={14} className={`${darkMode ? 'text-[#757575]' : 'text-gray-600'}`} />
             <span className={`text-xs ${darkMode ? 'text-[#757575]' : 'text-gray-600'}`}>E-mail</span>
           </button>
-
           {toastVisible && (
             <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs py-3 px-4 rounded-full shadow-lg">
               Email copied to clipboard
@@ -157,8 +155,8 @@ function HeaderSection({ darkMode, setDarkMode }) {
           onClick={handleThemeToggle}
         >
           {darkMode ? 
-            <Moon size={14} className={`${darkMode ? 'text-[#757575]' : 'text-gray-600'}`}/>
-            :
+            <Moon size={14} className={`${darkMode ? 'text-[#757575]' : 'text-gray-600'}`}/> 
+            : 
             <Sun size={14} className={`${darkMode ? 'text-[#757575]' : 'text-gray-600'}`}/>
           }
         </button>
@@ -273,7 +271,6 @@ function ExperienceSection({ darkMode }) {
     >
       <h1 
         className={`${darkMode ? 'text-white' : ''} font-medium text-[16px] mb-4`}
-        data-aos="fade-up"
       >
         Experience
       </h1>
@@ -464,6 +461,13 @@ function ProjectSection({ darkMode }) {
 
   return (
     <section id="projects" className="w-full text-gray-800 p-4 flex flex-col">
+
+      <h1 
+        className={`${darkMode ? 'text-white' : ''} font-medium text-[16px] mb-4`}
+      >
+        Project
+      </h1>
+
       {/* Grid container */}
       <div className="mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 gap-y-3">
         {projects.map((project, index) => (
